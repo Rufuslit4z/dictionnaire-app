@@ -1,0 +1,113 @@
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span> 
+			</button>
+			<a class="navbar-brand" href="#">LOGO</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="#">Accueil</a></li>
+	        <li><a href="#">Détails</a></li>
+	        <li><a href="#">Contacts</a></li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
+	      </ul>
+	    </div>
+	</div>
+</nav>
+
+<div class="col-sm-4">
+<!-- <div class="col-sm-4 bg-success"> -->
+	<form class="navbar-form" role="search" #word="ngForm" (ngSubmit)="onClickSubmit(word.value)">
+		<div class="form-group"><input type="text" name="search" class="form-control" placeholder="Rechercher..." ngModel></div>
+		<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+	</form>
+	<hr>
+	<p class="lead text-center"><em>{{ selection_str }}</em></p>
+	<div *ngFor="let selection of selection_2017">
+		<button class="btn btn-link" id="{{ selection }}" (click)="getSelectionWord(selection)">{{ selection }}</button>
+	</div>
+</div>
+
+
+<div class="col-sm-4" *ngIf="word">
+	<br>
+	<p class="lead">{{ getWord() }}</p>
+	<br>
+	<div *ngFor="let def of getDefObject(data)">
+
+		<div *ngIf="def.natures.length">
+			<p class="bg-info">
+				Nature grammaticale : <br><br>
+				<span *ngFor="let nature of def.natures">{{ toUpper(0, nature) }}<br></span>
+			</p>
+		</div>
+
+		<br>
+
+		<div *ngIf="def.definitions.length">
+			<p class="bg-danger">
+				Definition : <br><br> 
+				<span *ngFor="let definition of def.definitions">{{ toUpper(0, definition) }}<br></span>
+			</p>
+		</div>
+		<br>
+
+		<div *ngIf="def.exemples.length">
+			<p class="bg-info">
+				Exemple : <br><br>
+				<span *ngFor="let exemple of def.exemples">{{ toUpper(0 ,exemple) }}<br></span>
+			</p>
+		</div>
+		<br>
+
+		<div *ngIf="def.synonymes.length">
+			<p class="bg-danger">
+				Synonyme : <br><br>
+				<span *ngFor="let synonyme of def.synonymes"><a href="{{ synonyme }}">{{ toUpper(0, synonyme) }}</a><br></span>
+			</p>
+		</div>
+		
+		<hr>
+	<!--
+		
+		<p *ngIf="getDefObject(data).length">
+			Nature grammaticale : <br>
+			<span *ngFor="let def of getDefObject(data)">
+				{{ def.natures }}
+			</span>
+		</p>
+
+		<p *ngIf="getDefObject(data).length">
+			Definition : <br>
+			<span *ngFor="let def of getDefObject(data)">
+				{{ def.definitions }}
+			</span>
+		</p>
+
+		<p *ngIf="getDefObject(data).length">
+			Exemple : <br>
+			<span *ngFor="let def of getDefObject(data)">
+				{{ def.exemples }}
+			</span>
+		</p>
+
+		<p *ngIf="getDefObject(data).length">
+			Synonyme : <br>
+			<span *ngFor="let def of getDefObject(data)">
+				{{ def.synonymes }}
+			</span>
+		</p>
+	-->
+	</div>
+</div>
+
+<div class="col-sm-4">
+<!-- <div class="col-sm-4 bg-info"> -->
+	<p class="lead">Infos supplémentaires</p>
+</div>
